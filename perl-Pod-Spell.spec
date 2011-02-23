@@ -59,8 +59,10 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog README
-%{perl_vendorlib}/Pod/*.pm
+%attr(755,root,root) %{_bindir}/podspell
+%{perl_vendorlib}/Pod/Spell.pm
+%{perl_vendorlib}/Pod/Wordlist.pm
 # some people like to be able to use perldoc not only man (like me)
 %doc %{perl_vendorlib}/Pod/Wordlist.pod
-%{_mandir}/man3/*
-%{_bindir}/podspell
+%{_mandir}/man3/Pod::Spell.3pm*
+%{_mandir}/man3/Pod::Wordlist.3pm*
