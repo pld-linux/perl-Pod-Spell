@@ -8,16 +8,20 @@
 Summary:	Pod::Spell -- a formatter for spellchecking Pod
 Summary(pl.UTF-8):	Pod::Spell - moduł formatujący do kontroli pisowni dokumentacji Pod
 Name:		perl-Pod-Spell
-Version:	1.01
+Version:	1.04
 Release:	1
-# same as perl
-License:	GPL v1+ or Artistic
+License:	Artistic v2.0
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-module/Pod/%{pdir}-%{pnam}-%{version}.tar.gz
-# Source0-md5:	aa4964844da2586562aae5208e2dbe61
+# Source0-md5:	8e74b6ef83c9582fcd14d503557d7671
 URL:		http://search.cpan.org/dist/Pod-Spell/
+BuildRequires:	perl-ExtUtils-MakeMaker >= 6.30
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
+%if %{with tests}
+BuildRequires:	perl-Test-Deep
+BuildRequires:	perl-Test-Simple >= 0.88
+%endif
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -58,11 +62,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog README
+%doc CONTRIBUTING Changes
 %attr(755,root,root) %{_bindir}/podspell
 %{perl_vendorlib}/Pod/Spell.pm
 %{perl_vendorlib}/Pod/Wordlist.pm
-# some people like to be able to use perldoc not only man (like me)
-%doc %{perl_vendorlib}/Pod/Wordlist.pod
+%{_mandir}/man1/podspell.1p*
 %{_mandir}/man3/Pod::Spell.3pm*
 %{_mandir}/man3/Pod::Wordlist.3pm*
